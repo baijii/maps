@@ -11,7 +11,8 @@
 
 - (MGLHeatmapStyleLayer*)makeLayer:(MGLStyle*)style
 {
-    MGLSource *source = [style sourceWithIdentifier:self.sourceID];
+    MGLSource *source = [self layerWithSourceIDInStyle:style];
+    if (source == nil) { return nil; }
     MGLHeatmapStyleLayer *layer = [[MGLHeatmapStyleLayer alloc] initWithIdentifier:self.id source:source];
     layer.sourceLayerIdentifier = self.sourceLayerID;
     return layer;

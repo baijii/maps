@@ -35,11 +35,13 @@ import AnimatedShape from './utils/animated/AnimatedShape';
 import AnimatedCoordinatesArray from './utils/animated/AnimatedCoordinatesArray';
 import AnimatedExtractCoordinateFromArray from './utils/animated/AnimatedExtractCoordinateFromArray';
 import AnimatedRouteCoordinatesArray from './utils/animated/AnimatedRouteCoordinatesArray';
+import Style from './components/Style';
+import Logger from './utils/Logger';
 
 const MapboxGL = {...NativeModules.MGLModule};
 
 // static methods
-MapboxGL.requestAndroidLocationPermissions = async function() {
+MapboxGL.requestAndroidLocationPermissions = async function () {
   if (isAndroid()) {
     const res = await PermissionsAndroid.requestMultiple([
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -72,6 +74,7 @@ MapboxGL.PointAnnotation = PointAnnotation;
 MapboxGL.Callout = Callout;
 MapboxGL.UserLocation = UserLocation;
 MapboxGL.Camera = Camera;
+MapboxGL.Style = Style;
 
 // annotations
 MapboxGL.Annotation = Annotation;
@@ -108,6 +111,7 @@ MapboxGL.AnimatedCoordinatesArray = AnimatedCoordinatesArray;
 MapboxGL.AnimatedExtractCoordinateFromArray = AnimatedExtractCoordinateFromArray;
 MapboxGL.AnimatedRouteCoordinatesArray = AnimatedRouteCoordinatesArray;
 MapboxGL.AnimatedShape = AnimatedShape;
+MapboxGL.Logger = Logger;
 
 const {LineJoin} = MapboxGL;
 
@@ -141,6 +145,8 @@ export {
   AnimatedShape,
   Animated,
   LineJoin,
+  Logger,
+  Style,
 };
 
 export default MapboxGL;

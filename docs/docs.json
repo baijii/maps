@@ -1863,7 +1863,7 @@
         "required": false,
         "type": "object",
         "default": "none",
-        "description": "Specifies the external images in key-value pairs required for the shape source.\nKeys are names - see iconImage expressions, values can be either urls-s objects \nwith format {uri: 'http://...'}` or `require('image.png')` or `import 'image.png'`"
+        "description": "Specifies the external images in key-value pairs required for the shape source.\nKeys are names - see iconImage expressions, values can be either urls-s objects\nwith format {uri: 'http://...'}` or `require('image.png')` or `import 'image.png'`"
       },
       {
         "name": "nativeAssetImages",
@@ -2801,6 +2801,13 @@
         "description": "Adds attribution offset, e.g. `{top: 8, left: 8}` will put attribution button in top-left corner of the map"
       },
       {
+        "name": "tintColor",
+        "required": false,
+        "type": "union",
+        "default": "none",
+        "description": "MapView's tintColor - ios only\n@platform ios"
+      },
+      {
         "name": "logoEnabled",
         "required": false,
         "type": "bool",
@@ -3044,6 +3051,28 @@
       "../utils"
     ],
     "name": "MarkerView"
+  },
+  "NativeUserLocation": {
+    "description": "",
+    "displayName": "NativeUserLocation",
+    "methods": [],
+    "props": [
+      {
+        "name": "androidRenderMode",
+        "required": false,
+        "type": "enum",
+        "default": "none",
+        "description": "Android render mode.\n\n - normal: just a circle\n - compass: triangle with heading\n - gps: large arrow\n\n@platform android"
+      },
+      {
+        "name": "iosShowsUserHeadingIndicator",
+        "required": false,
+        "type": "bool",
+        "default": "none",
+        "description": "iOS only. A Boolean value indicating whether the user location annotation may display a permanent heading indicator.\n\n@platform ios"
+      }
+    ],
+    "name": "NativeUserLocation"
   },
   "PointAnnotation": {
     "description": "PointAnnotation represents a one-dimensional shape located at a single geographical coordinate. Consider using ShapeSource and SymbolLayer instead, if you have many points and you have static images, they'll offer much better performance.\nIf you need interctive views please use MarkerView, as with PointAnnotation on android child views are rendered onto a bitmap for better performance.",
@@ -3658,6 +3687,21 @@
       "../utils"
     ],
     "name": "ShapeSource"
+  },
+  "Style": {
+    "description": "Style is a component that automatically adds sources / layers to the map using Mapbox GL Style Spec.\nOnly [`sources`](https://docs.mapbox.com/mapbox-gl-js/style-spec/sources) & [`layers`](https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/) are supported.\nOther fields such as `sprites`, `glyphs` etc. will be ignored. Not all layer / source attributes from the style spec are supported, in general the supported attributes will mentioned under https://github.com/react-native-mapbox-gl/maps/tree/master/docs.",
+    "displayName": "Style",
+    "methods": [],
+    "props": [
+      {
+        "name": "json",
+        "required": false,
+        "type": "any",
+        "default": "none",
+        "description": "A JSON object conforming to the schema described in the Mapbox Style Specification , or a URL to such JSON."
+      }
+    ],
+    "name": "Style"
   },
   "SymbolLayer": {
     "description": "SymbolLayer is a style layer that renders icon and text labels at points or along lines on the map.",
@@ -5079,7 +5123,7 @@
     "methods": [
       {
         "name": "setLocationManager",
-        "docblock": "Whether to start or stop the locationManager\n\nNotice, that locationManager will start automatically when\neither `onUpdate` or `visible` are set\n\n@param {Object} running - Object with key `running` and `boolean` value\n@return {void}",
+        "docblock": "Whether to start or stop the locationManager\n\nNotice, that locationManager will start automatically when\neither `onUpdate` or `visible` are set\n\n@async\n@param {Object} running - Object with key `running` and `boolean` value\n@return {Promise<void>}",
         "modifiers": [
           "async"
         ],
@@ -5091,7 +5135,12 @@
         "returns": {
           "description": null,
           "type": {
-            "name": "void"
+            "name": "Promise",
+            "elements": [
+              {
+                "name": "void"
+              }
+            ]
           }
         },
         "description": "Whether to start or stop the locationManager\n\nNotice, that locationManager will start automatically when\neither `onUpdate` or `visible` are set",
@@ -5119,6 +5168,20 @@
         "type": "bool",
         "default": "true",
         "description": "Whether location icon is animated between updates"
+      },
+      {
+        "name": "renderMode",
+        "required": false,
+        "type": "enum",
+        "default": "'normal'",
+        "description": "FIX ME NO DESCRIPTION"
+      },
+      {
+        "name": "androidRenderMode",
+        "required": false,
+        "type": "enum",
+        "default": "none",
+        "description": "native/android only render mode\n\n - normal: just a circle\n - compass: triangle with heading\n - gps: large arrow\n\n@platform android"
       },
       {
         "name": "visible",

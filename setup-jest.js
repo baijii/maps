@@ -2,7 +2,7 @@ import {NativeModules} from 'react-native';
 
 function keyMirror(keys) {
   const obj = {};
-  keys.forEach(key => (obj[key] = key));
+  keys.forEach((key) => (obj[key] = key));
   return obj;
 }
 
@@ -87,7 +87,7 @@ NativeModules.MGLModule = {
 };
 
 NativeModules.MGLOfflineModule = {
-  createPack: packOptions => {
+  createPack: (packOptions) => {
     return Promise.resolve({
       bounds: packOptions.bounds,
       metadata: JSON.stringify({name: packOptions.name}),
@@ -114,3 +114,7 @@ NativeModules.MGLLocationModule = {
   start: jest.fn(),
   pause: jest.fn(),
 };
+
+// Mock for AbortController. Will probably not be required during testing.
+window = {};
+window.AbortController = class {};

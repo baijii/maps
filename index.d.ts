@@ -236,7 +236,9 @@ declare namespace MapboxGL {
   }
 
   class PointAnnotation extends Component<PointAnnotationProps> {}
+  class MarkerView extends Component<MarkerViewProps> {}
   class Callout extends Component<CalloutProps> {}
+  interface Style extends React.FC<StyleProps> {}
 
   /**
    * Sources
@@ -680,8 +682,15 @@ export interface PointAnnotationProps {
   onDeselected?: () => void;
 }
 
+export interface MarkerViewProps extends PointAnnotationProps {
+}
+
+export interface StyleProps {
+  json: any
+}
+
 export interface CalloutProps extends Omit<ViewProps, 'style'> {
-  title: string;
+  title?: string;
   style?: StyleProp<WithExpression<ViewStyle>>;
   containerStyle?: StyleProp<WithExpression<ViewStyle>>;
   contentStyle?: StyleProp<WithExpression<ViewStyle>>;

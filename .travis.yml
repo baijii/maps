@@ -25,7 +25,7 @@ matrix:
     - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
     - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
   - os: osx
-    osx_image: xcode10.2
+    osx_image: xcode11.3
     node_js: 10.18.1
     cache:
       bundler: true
@@ -61,7 +61,7 @@ script:
     cd $TRAVIS_BUILD_DIR/example/ios
     set -o pipefail
     rm -f build
-    xcodebuild -arch x86_64 -sdk iphonesimulator12.2  -workspace ./RNMapboxGLExample.xcworkspace -scheme RNMapboxGLExample | xcpretty -c
+    xcodebuild -arch x86_64 -sdk iphonesimulator13.2  -workspace ./RNMapboxGLExample.xcworkspace -scheme RNMapboxGLExample | xcpretty -c
   fi
 - |
   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
